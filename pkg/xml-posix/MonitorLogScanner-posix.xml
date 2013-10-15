@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uptime xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.uptimesoftware.com/erdc/erdc erdc"
+	xmlns="http://www.uptimesoftware.com/erdc/erdc"
+	xmlns:upt="http://www.uptimesoftware.com/erdc/erdc" version="4.0" target_grouping="other">
+	<class>Log Scanner</class>
+	<exec>com.uptimesoftware.uptime.erdc.MonitorCustomScriptRunner</exec>
+	<elements>
+		<element name="port" parameter_type="input" data_type="integer" gui_basic="1" range_type="0">
+			<control_options>size:4</control_options>
+			<default_value>9998</default_value>
+			<short_description>Port</short_description>
+			<long_description>Port number the up.time agent is listening on</long_description>
+			<validation_rule>
+				<integer/>
+			</validation_rule>
+			<error_message>
+				<integer> The port must be an integer value </integer>
+			</error_message>
+			<gui_type>
+				<integer/>
+			</gui_type>
+		</element>
+		<element name="process" parameter_type="input" data_type="string" gui_basic="1" range_type="0">
+			<control_options> size:40 </control_options>
+			<default_value>scripts/MonitorLogScanner/check_log.sh</default_value>
+			<short_description>Script Name</short_description>
+			<long_description>Name of the script/binary/process to be executed by up.time </long_description>
+			<validation_rule>
+				<alphanumeric/>
+			</validation_rule>
+			<error_message>
+				<alphanumeric>required field</alphanumeric>
+			</error_message>
+			<gui_type>
+				<string/>
+			</gui_type>
+		</element>
+		<element name="log_file" parameter_type="input" data_type="string" gui_basic="1"
+			range_type="0" units="">
+			<control_options>size:8</control_options>
+			<default_value/>
+			<short_description>Log File</short_description>
+			<long_description>Full path of log file that will be parsed</long_description>
+			<validation_rule/>
+			<error_message/>
+			<gui_type>
+				<string/>
+			</gui_type>
+		</element>
+		<element name="line_num" parameter_type="input" data_type="string" gui_basic="1"
+			range_type="0" units="">
+			<control_options>size:8</control_options>
+			<default_value/>
+			<short_description>Number of lines</short_description>
+			<long_description>The number of lines to read from the end of the log/text file</long_description>
+			<validation_rule/>
+			<error_message/>
+			<gui_type>
+				<string/>
+			</gui_type>
+		</element>
+		<element name="usebookmarkfile" parameter_type="input" data_type="boolean"
+			gui_basic="1" range_type="0">
+			<control_options> size:2 </control_options>
+			<default_value />
+			<short_description>Check for New Lines Only</short_description>
+			<long_description>Only Check for New Lines</long_description>
+			<validation_rule />
+			<error_message />
+			<gui_type>
+				<boolean />
+			</gui_type>
+		</element>
+		<element name="search_regex" parameter_type="input" data_type="string" gui_basic="1"
+			range_type="0" units="">
+			<control_options>size:8</control_options>
+			<default_value/>
+			<short_description>Search String (regex)</short_description>
+			<long_description>Text that will be searched for in the log file (regex compatible)</long_description>
+			<validation_rule/>
+			<error_message/>
+			<gui_type>
+				<string/>
+			</gui_type>
+		</element>
+		<element name="ignore_regex" parameter_type="input" data_type="string" gui_basic="1"
+			range_type="0" units="">
+			<control_options>size:8</control_options>
+			<default_value/>
+			<short_description>Ignore String (regex)</short_description>
+			<long_description>String to ignore in the log file (regex compatible)</long_description>
+			<validation_rule/>
+			<error_message/>
+			<gui_type>
+				<string/>
+			</gui_type>
+		</element>
+		<element name="occurences" parameter_type="output" data_type="integer" gui_basic="1"
+			range_type="0" units="times">
+			<control_options>size:8</control_options>
+			<default_value/>
+			<short_description>Number of Occurrences of String</short_description>
+			<long_description>How many times does the search string appear in the log file</long_description>
+			<validation_rule/>
+			<error_message/>
+			<gui_type>
+				<integer/>
+			</gui_type>
+		</element>
+		<element name="output" parameter_type="output" data_type="string" gui_basic="1"
+			range_type="0" units="times">
+			<control_options>size:8</control_options>
+			<default_value/>
+			<short_description>Lines Found</short_description>
+			<long_description>Output the text that was found</long_description>
+			<validation_rule/>
+			<error_message/>
+			<gui_type>
+				<string/>
+			</gui_type>
+		</element>
+	</elements>
+	<help>When running a custom script check, note that the second parameter is always the name of the assigned host.
+	The script that's executed should output each variable on it's own line, otherwise up.time won't be able to capture the appropriate information.</help>
+</uptime>

@@ -1,0 +1,7 @@
+platform: aix linux solaris 
+dependencies: 4.5.x agent 
+definition-xml: check_log.xml 
+executable: check_log.pl
+support-file:  Algorithm/Diff.pm
+support-file: README.txt
+readme: README.txt

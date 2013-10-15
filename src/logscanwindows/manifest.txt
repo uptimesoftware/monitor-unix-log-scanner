@@ -1,0 +1,7 @@
+platform: windows
+dependencies: +4.5.x up.time agent
+definition-xml: check_log.xml 
+executable: check_log.bat
+executable: check_log.php
+support-file: readme.txt
+readme: readme.txt
