@@ -7,13 +7,13 @@ See http://uptimesoftware.github.io for more information.
 
 ### Category
 
-{ page.category }}
+plugin
 
 ### Version Compatibility
 
 
   
-    * Unix Log Scanner 2.0 - 7.2, 7.1
+* Unix Log Scanner 2.0 - 7.2, 7.1
   
 
 
@@ -44,5 +44,8 @@ None; no agent required
 
 
 ### Languages Used
-* Shell/Batch* PHP
+
+* Shell/Batch
+
+* PHP
 
