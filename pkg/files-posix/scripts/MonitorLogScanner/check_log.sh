@@ -1,3 +1,7 @@
 #!/bin/sh
 
-"../../apache/bin/php.exe" check_log.php
+inst=`grep ^inst /etc/init.d/uptime_httpd | cut -d= -f2`
+MIBDIRS=$inst/mibs
+export MIBDIRS
+
+/usr/local/uptime/apache/bin/php check_log.php
