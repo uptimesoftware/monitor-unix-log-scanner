@@ -13,15 +13,20 @@ $search_regex   = getenv('UPTIME_SEARCH_REGEX');
 $ignore_regex   = getenv('UPTIME_IGNORE_REGEX');
 $use_bookmark   = getenv('UPTIME_USEBOOKMARKFILE');
 
-if ($use_bookmark) {
+$skip_lines = false;
+$prev_line = '';
+
+if (empty($line_num)){
+	$line_num=1000;
+}
+
+if ($use_bookmark == 'true') {
 	// strip away any invalid characters to use for the bookmark file name
 	$pattern = '/[\/\\\?\'\"\:\;\*\^\$\@\!\#\%]/';
 	$f = preg_replace($pattern, '', $log_file);
 	$tmpfile = "tmpfile-{$agent_hostname}-{$f}.last";
-	$skip_lines = false;
 
 	// open the last line in the bookmark file (if it exists)
-	$prev_line = '';
 	if (file_exists($tmpfile)) {
 		$fh = fopen($tmpfile, 'r');
 		$prev_line = fgets($fh);
@@ -29,7 +34,7 @@ if ($use_bookmark) {
 		$skip_lines = true;
 	}
 }
-	
+
 // Main code
 
 $cmd = "tailvaradm {$line_num} {$log_file}";
@@ -37,15 +42,12 @@ if ($debug) {
 	print "Hostname: {$agent_hostname}\n";
 	print "Port: {$agent_port}\n";
 	print "Cmd: {$cmd}\n";
+	print "{$use_bookmark}\n";
 }
 $agent_output = agentcmd($agent_hostname, $agent_port, $cmd);
 
 if (strlen($agent_output) == 0) {
 	print "Error No lines returned from agent. Check the agent script permissions?";
-	exit(1);
-}
-if (stristr($agent_output, "ERR")) {
-	print "Error Output received: 'ERR'. The agent may not be configured correctly. Check the password?";
 	exit(1);
 }
 if (stristr($agent_output, "tail: cannot open `{$log_file}' for reading:")) {
@@ -96,7 +98,7 @@ while ($i < count($output_arr)) {
 // print results
 print "occurences {$occurences}\n";
 
-if ($use_bookmark) {
+if ($use_bookmark == 'true') {
 	// save the last line in the bookmark file
 	if (strlen($last_line) > 0) {
 		$fh = fopen($tmpfile, 'w');
